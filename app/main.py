@@ -4,6 +4,7 @@ app = Flask(__name__)
 
 counter = 0
 
+
 @app.route('/')
 def visit():
     global counter
