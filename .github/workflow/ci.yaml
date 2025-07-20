@@ -7,20 +7,25 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        # This pulls your latest code from GitHub.
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.10'
+        # This installs Python 3.10 in the GitHub Actions runner.
 
       - name: Install dependencies
         run: |
           pip install -r app/requirements.txt
+        # Installs all required Python libraries listed in your requirements.txt.
 
-      - name: Lint check
+      - name: Run flake8 (Lint check)
         run: |
           pip install flake8
           flake8 app/
+        # Installs flake8 and runs it to catch code formatting/style issues.
