@@ -1,14 +1,26 @@
-name: Visitor App CI
+name: CI for Flask App
 
-on: [push]
+on:
+  push:
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
           python-version: '3.10'
-      - run: pip install -r app/requirements.txt
-      - run: python app/main.py &
+
+      - name: Install dependencies
+        run: |
+          pip install -r app/requirements.txt
+
+      - name: Lint check
+        run: |
+          pip install flake8
+          flake8 app/
